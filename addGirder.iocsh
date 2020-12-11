@@ -1,42 +1,3 @@
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-# and again
-
-############################################33
-epicsEnvSet("motorName",  "foobar1")
-# echo ${motorName}
-echo ${motorName}
-
-
-epicsEnvSet("test",  "TEST1_${motorName}")
-# echo ${test}
-echo ${test}
-
-epicsEnvSet("motorName",  "foobar2")
-epicsEnvSet("test",  "TEST2_${motorName}")
-
-epicsEnvUnset(motorName)
-# echo ${motorName}
-echo ${motorName}
-
-epicsEnvSet("motorName",  "foobar3")
-epicsEnvSet("test",  "${motorName}")
-epicsEnvSet("test",  "TEST3_${motorName}")
-# echo ${test}
-echo ${test}
-
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-
-
 #- device name
 epicsEnvSet("DEV",      "${DEV=AGIR-TEST}")
 epicsEnvSet("CFG_ROOT", "${AGIR_DIR}/")
@@ -51,27 +12,25 @@ epicsEnvSet("motorName",  "TY1")
 epicsEnvSet("axisId",	    1)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 
-epicsEnvSet("pitch",      0.250)
-epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
+epicsEnvSet("homeOffset", "${HO_TY1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/M1.1.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.1.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 1.2, Tx, first foot --> roll
 # ++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
 epicsEnvSet("motorName",  "TX1")
-echo ${motorName}
 epicsEnvSet("axisId",	    2)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
-echo ${motorName}
 
-ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # one revolution per second, v_max
-#- epicsEnvSet("pitch",      0.033333333)
-epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
+epicsEnvSet("homeOffset", "${HO_TX1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
 epicsEnvUnset("motorName")
 
 #- -----------------------------------------------------------------------------
@@ -81,11 +40,11 @@ epicsEnvSet("motorName",  "TY2")
 epicsEnvSet("axisId",	    3)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 
-epicsEnvSet("pitch",      0.250)
-epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
+epicsEnvSet("homeOffset", "${HO_TY2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/M2.1.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.1.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 2.2, Tx, second foot --> roll
@@ -94,10 +53,11 @@ epicsEnvSet("motorName",  "TX2")
 epicsEnvSet("axisId",	    4)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 
-epicsEnvSet("pitch",      0.033333333)
-epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
+epicsEnvSet("homeOffset", "${HO_TX2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
 
 
 #- Apply hardware configuration
@@ -110,14 +70,14 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 # AXES
 #- virutal axes
 #- heave: TY
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/TY.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/TY.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/TY.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/TY.sax"
 #- pitch: Rx
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/RX.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/RX.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
 #- roll: Rz
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/RZ.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/RZ.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
 
 ##############################################################################
 ############# Configure diagnostics:

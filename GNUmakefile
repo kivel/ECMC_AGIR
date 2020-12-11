@@ -3,10 +3,7 @@ include /ioc/tools/driver.makefile
 
 MODULE=AGIR
 
-LIBVERSION = dev
-
-# build for Linux only
-BUILDCLASSES = Linux
+LIBVERSION = IBS
 
 # build for EPICS_Version >=7 only
 EXCLUDE_VERSIONS = 3
@@ -16,8 +13,20 @@ ARCH_FILTER = RHEL%
 
 # scripts
 SCRIPTS += startup.cmd
-#SCRIPTS += addGirder.iocsh
+SCRIPTS += addGirder.iocsh
 
 # config
-## axes
-#SCRIPTS += cfg/axes/AM8122.pax
+## physical axes
+SCRIPTS += cfg/axes/AM8122.pax
+## virutal axes
+SCRIPTS += cfg/axes/TY.vax
+SCRIPTS += cfg/axes/RX.vax
+SCRIPTS += cfg/axes/RZ.vax
+## synchronization
+SCRIPTS += cfg/axes/TY.sax
+SCRIPTS += cfg/axes/RX.sax
+SCRIPTS += cfg/axes/RZ.sax
+SCRIPTS += cfg/axes/M1.1.sax
+SCRIPTS += cfg/axes/M1.2.sax
+SCRIPTS += cfg/axes/M2.1.sax
+SCRIPTS += cfg/axes/M2.2.sax
