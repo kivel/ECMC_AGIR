@@ -1,0 +1,161 @@
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+# and again
+
+############################################33
+epicsEnvSet("motorName",  "foobar1")
+# echo ${motorName}
+echo ${motorName}
+
+
+epicsEnvSet("test",  "TEST1_${motorName}")
+# echo ${test}
+echo ${test}
+
+epicsEnvSet("motorName",  "foobar2")
+epicsEnvSet("test",  "TEST2_${motorName}")
+
+epicsEnvUnset(motorName)
+# echo ${motorName}
+echo ${motorName}
+
+epicsEnvSet("motorName",  "foobar3")
+epicsEnvSet("test",  "${motorName}")
+epicsEnvSet("test",  "TEST3_${motorName}")
+# echo ${test}
+echo ${test}
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+
+
+#- device name
+epicsEnvSet("DEV",      "${DEV=AGIR-TEST}")
+epicsEnvSet("CFG_ROOT", "${AGIR_DIR}/")
+
+#- disable Synchronization with `Synchronization=[false,False,0]`
+ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
+
+#- -----------------------------------------------------------------------------
+#- motor 1.1, Ty, first foot --> pitch and heave
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+epicsEnvSet("motorName",  "TY1")
+epicsEnvSet("axisId",	    1)
+epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
+
+epicsEnvSet("pitch",      0.250)
+epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/M1.1.sax"
+
+#- -----------------------------------------------------------------------------
+#- motor 1.2, Tx, first foot --> roll
+# ++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+epicsEnvSet("motorName",  "TX1")
+echo ${motorName}
+epicsEnvSet("axisId",	    2)
+epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
+echo ${motorName}
+
+ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # one revolution per second, v_max
+#- epicsEnvSet("pitch",      0.033333333)
+epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+epicsEnvUnset("motorName")
+
+#- -----------------------------------------------------------------------------
+#- motor 2.1, Ty, second foot --> pitch and heave
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+epicsEnvSet("motorName",  "TY2")
+epicsEnvSet("axisId",	    3)
+epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
+
+epicsEnvSet("pitch",      0.250)
+epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/M2.1.sax"
+
+#- -----------------------------------------------------------------------------
+#- motor 2.2, Tx, second foot --> roll
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+epicsEnvSet("motorName",  "TX2")
+epicsEnvSet("axisId",	    4)
+epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
+
+epicsEnvSet("pitch",      0.033333333)
+epicsEnvSet("homeOffset", "${HO_${motorName}=0}")
+
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+
+
+#- Apply hardware configuration
+${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
+
+#- ADDITIONAL SETUP
+#-
+#- END of ADDITIONAL SETUP
+
+# AXES
+#- virutal axes
+#- heave: TY
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/TY.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/TY.sax"
+#- pitch: Rx
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/RX.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/RX.sax"
+#- roll: Rz
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=./cfg/RZ.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=./cfg/RZ.sax"
+
+##############################################################################
+############# Configure diagnostics:
+
+ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
+ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
+ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
+ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
+
+# go active
+${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
+
+# ------------------------------------------------------------------------------
+# further up "motorName" went through a number of 'set'-operations already
+# echo ${motorName}
+echo ${motorName}
+epicsEnvSet("motorName",  "foobar1")
+# echo ${motorName}
+echo ${motorName}
+
+
+epicsEnvSet("test",  "TEST1_${motorName}")
+# echo ${test}
+echo ${test}
+
+epicsEnvSet("motorName",  "foobar2")
+epicsEnvSet("test",  "TEST2_${motorName}")
+
+epicsEnvUnset(motorName)
+# echo ${motorName}
+echo ${motorName}
+
+epicsEnvSet("motorName",  "foobar3")
+epicsEnvSet("test",  "${motorName}")
+epicsEnvSet("test",  "TEST3_${motorName}")
+# echo ${test}
+echo ${test}
+
+# vim: ts=2 sw=2 et

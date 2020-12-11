@@ -1,0 +1,5 @@
+file AM8122.pax.template {
+  pattern {ECMC_EC_SLAVE_NUM,	girderId, motorName, 	axisId, axisDesc, 		EGU	}
+          {0,									1,				"1.1",			1,			"Motor 1.1",	deg	}
+}
+
