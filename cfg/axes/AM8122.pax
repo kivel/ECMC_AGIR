@@ -49,8 +49,8 @@ epicsEnvSet("ECMC_HOME_ACC",              "$(SM_HOMEACC=21)")
 epicsEnvSet("ECMC_HOME_DEC",              "$(SM_HOMEDEC=100)")
 
 #- Controller
-epicsEnvSet("ECMC_CNTRL_KP",              "100")
-epicsEnvSet("ECMC_CNTRL_KI",              "0.1")
+epicsEnvSet("ECMC_CNTRL_KP",              "1")
+epicsEnvSet("ECMC_CNTRL_KI",              "0.001")
 epicsEnvSet("ECMC_CNTRL_KD",              "0.0")
 epicsEnvSet("ECMC_CNTRL_KFF",             "1.0")
 
