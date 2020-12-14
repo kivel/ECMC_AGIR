@@ -1,7 +1,7 @@
 include /ioc/tools/driver.makefile
 #include $(EPICS_MODULES)/makeUtils/latest/utils.mk
 
-MODULE=AGIR
+MODULE=ECMC_AGIR
 
 LIBVERSION = IBS
 
