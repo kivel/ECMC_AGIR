@@ -32,7 +32,7 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 2.1, Ty, second foot --> pitch and heave
@@ -60,7 +60,7 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
 
 
 #- Apply hardware configuration
@@ -79,8 +79,8 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
 #- roll: Rz
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
 
 ##############################################################################
 ############# Configure diagnostics:
