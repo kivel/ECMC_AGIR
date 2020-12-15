@@ -1,6 +1,6 @@
 #- device name
 epicsEnvSet("DEV",      "${DEV=AGIR-TEST}")
-epicsEnvSet("CFG_ROOT", "${AGIR_DIR}/")
+epicsEnvSet("CFG_ROOT", "${ECMC_AGIR_DIR}/")
 
 #- disable Synchronization with `Synchronization=[false,False,0]`
 ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
