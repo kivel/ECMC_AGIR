@@ -37,7 +37,7 @@ ecmcEpicsEnvSetCalc("ECMC_VELO",          "1.0*${pitch}","%f")        # one revo
 ecmcEpicsEnvSetCalc("ECMC_JOG_VEL",       "${ECMC_VELO}/10","%f")     # 1/10th of v_max
 #- epicsEnvSet("ECMC_JOG_VEL",               "${ECMC_JOG_VEL=${ECMC_JVMAX}}")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
-epicsEnvSet("ECMC_ACCL",                  "0.5")		                  # 500 ms ramp to v_max, trapez
+epicsEnvSet("ECMC_ACCL",                  "0.05")		                  # 50 ms ramp to v_max, trapez
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
 
 #- Homing
@@ -69,10 +69,10 @@ epicsEnvSet("ECMC_DXLM_ENABLE",           "0")
 #- Position lag
 epicsEnvSet("ECMC_MON_LAG_MON_TOL",       "${pitch}") # allow one revolution lag
 epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
-epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "0")
+epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
 
 #- At target
-epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.001")    # postion within 1 micron
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.005")    # postion within 5 micron
 epicsEnvSet("ECMC_MON_AT_TARGET_TIME",    "100")
 epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
 
