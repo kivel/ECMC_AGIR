@@ -8,6 +8,7 @@ ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
 #- -----------------------------------------------------------------------------
 #- motor 1.1, Ty, first foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
 epicsEnvSet("motorName",  "TY1")
 epicsEnvSet("axisId",	    1)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -22,6 +23,7 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 #- motor 1.2, Tx, first foot --> roll
 # ++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
 epicsEnvSet("motorName",  "TX1")
 epicsEnvSet("axisId",	    2)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -30,12 +32,12 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
-epicsEnvUnset("motorName")
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 2.1, Ty, second foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
 epicsEnvSet("motorName",  "TY2")
 epicsEnvSet("axisId",	    3)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -49,6 +51,7 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 #- -----------------------------------------------------------------------------
 #- motor 2.2, Tx, second foot --> roll
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
+ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
 epicsEnvSet("motorName",  "TX2")
 epicsEnvSet("axisId",	    4)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -57,7 +60,7 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
 
 
 #- Apply hardware configuration
@@ -73,11 +76,11 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/TY.vax"
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/TY.sax"
 #- pitch: Rx
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
 #- roll: Rz
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
+#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -91,31 +94,5 @@ ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active
 ${SCRIPTEXEC} ${ecmccfg_DIR}setAppMode.cmd
-
-# ------------------------------------------------------------------------------
-# further up "motorName" went through a number of 'set'-operations already
-# echo ${motorName}
-echo ${motorName}
-epicsEnvSet("motorName",  "foobar1")
-# echo ${motorName}
-echo ${motorName}
-
-
-epicsEnvSet("test",  "TEST1_${motorName}")
-# echo ${test}
-echo ${test}
-
-epicsEnvSet("motorName",  "foobar2")
-epicsEnvSet("test",  "TEST2_${motorName}")
-
-epicsEnvUnset(motorName)
-# echo ${motorName}
-echo ${motorName}
-
-epicsEnvSet("motorName",  "foobar3")
-epicsEnvSet("test",  "${motorName}")
-epicsEnvSet("test",  "TEST3_${motorName}")
-# echo ${test}
-echo ${test}
 
 # vim: ts=2 sw=2 et

@@ -14,8 +14,10 @@ epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",        "1")       # Enable Axis PLC
 # Each line below is appended to one single expression/source.
 # Executed in sync with axis (before)
 #- enable axis(1) if either heave(ax5) or pitch(ax6) are enabled
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=(ax5.drv.enable or ax6.drv.enable)|}|")
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "ax3.traj.setpos:=ax5.traj.setpos+ax6.traj.setpos/2.620|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "ax3.traj.setpos:=ax5.traj.setpos|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax3.traj.source){ax3.drv.enable:=ax5.drv.enable|}|")
+#epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "if(ax3.traj.source){ax3.drv.enable:=(ax5.drv.enable or ax6.drv.enable)|}|")
+#epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "ax3.traj.setpos:=ax5.traj.setpos+ax6.traj.setpos/2.620|")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "")
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "")
