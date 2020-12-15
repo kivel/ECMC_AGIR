@@ -76,8 +76,8 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/TY.vax"
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/TY.sax"
 #- pitch: Rx
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
-#${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
 #- roll: Rz
 #${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
 #${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
