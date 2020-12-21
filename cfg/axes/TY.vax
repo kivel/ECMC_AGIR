@@ -3,7 +3,7 @@ epicsEnvSet("ECMC_MOTOR_NAME",            "TY")
 epicsEnvSet("ECMC_AXIS_NO",               "5")
 epicsEnvSet("ECMC_DESC",                  "heave; TY")
 epicsEnvSet("ECMC_EGU",                   "mm")                       # Motor Record Unit
-epicsEnvSet("ECMC_PREC",                  "3")                        # Motor Record Precision
+epicsEnvSet("ECMC_PREC",                  "5")                        # Motor Record Precision
 epicsEnvSet("ECMC_AXISCONFIG",            "")                         # Extra parameters to driver
 epicsEnvSet("ECMC_EC_AXIS_HEALTH",        "")                         # Entry for axis health output (example: ec0.s1.BO_1.0)
 epicsEnvSet("ECMC_MOD_RANGE" ,            "0")                        # Modulo range (traj setpoints and encoder values will be in range 0..ECMC_MOD_RANGE)
@@ -19,8 +19,8 @@ epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder 
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s0.ZERO")              # Ethercat entry for actual position input (encoder)
 
 #- Trajectory
-epicsEnvSet("ECMC_VELO",                  "0.1")
-epicsEnvSet("ECMC_JOG_VEL",               "5")
+epicsEnvSet("ECMC_VELO",                  "1.0")
+epicsEnvSet("ECMC_JOG_VEL",               "0.10")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
@@ -50,7 +50,7 @@ epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "0")
 
 #- At target
-epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.005")
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.001")
 epicsEnvSet("ECMC_MON_AT_TARGET_TIME",    "100")
 epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
 

@@ -8,7 +8,11 @@ ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
 #- -----------------------------------------------------------------------------
 #- motor 1.1, Ty, first foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
+
+# ______________________________________________________________________________
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+# ______________________________________________________________________________
+
 epicsEnvSet("motorName",  "TY1")
 epicsEnvSet("axisId",	    1)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -23,7 +27,8 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 #- motor 1.2, Tx, first foot --> roll
 # ++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+
 epicsEnvSet("motorName",  "TX1")
 epicsEnvSet("axisId",	    2)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -37,7 +42,8 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 #- -----------------------------------------------------------------------------
 #- motor 2.1, Ty, second foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+
 epicsEnvSet("motorName",  "TY2")
 epicsEnvSet("axisId",	    3)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
@@ -51,7 +57,8 @@ ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_R
 #- -----------------------------------------------------------------------------
 #- motor 2.2, Tx, second foot --> roll
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-ecmcConfigOrDie "Cfg.EcWriteSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x15,50,4)"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+
 epicsEnvSet("motorName",  "TX2")
 epicsEnvSet("axisId",	    4)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")

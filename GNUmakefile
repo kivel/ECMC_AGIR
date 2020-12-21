@@ -16,6 +16,8 @@ SCRIPTS += startup.cmd
 SCRIPTS += addGirder.iocsh
 
 # config
+## EP7211-0034 config for AM8211 Motor
+SCRIPTS += cfg/AM8211_AGIR.cfg
 ## physical axes
 SCRIPTS += cfg/axes/AM8122.pax
 ## virutal axes
@@ -32,4 +34,3 @@ SCRIPTS += cfg/axes/M1.1.sax
 SCRIPTS += cfg/axes/M1.2.sax
 SCRIPTS += cfg/axes/M2.1.sax
 SCRIPTS += cfg/axes/M2.2.sax
-
