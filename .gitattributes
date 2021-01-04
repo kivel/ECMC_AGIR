@@ -1,2 +1,6 @@
 *.iocsh gitlab-language=shell
+*.pax gitlab-language=shell
+*.vax gitlab-language=shell
+*.sax gitlab-language=shell
+*.cfg gitlab-language=shell
 
