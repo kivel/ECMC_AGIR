@@ -2,6 +2,34 @@
 
 ECMC motion module for SLS 2.0 girder mover system
 
+## Usage
+
+### MACROS
+```bash
+#- optional
+#- DEV              aka prefix, defaults to 'AGIR-TEST'
+#- Synchronization  optional parameter to disable synchronization, `Synchronization=[false,False,0]`
+#- 
+#- mandatory
+#- HO_TY1           home offset 1st wedge, defaults to 0
+#- HO_TX1           home offset 1st 'roll joint', defaults to 0
+#- HO_TY2           home offset 2nd wedge, defaults to 0
+#- HO_TX2           home offset 2nd 'roll joint', defaults to 0
+```
+
+### Example IOC
+```bash
+#- require the ECMC_AGIR module
+#- this calls ${ECMC_AGIR_DIR}startup.cmd, which in turn pulls together all dependencies
+require ECMC_AGIR, IBS
+
+#- instantiate girder
+#- DEV = AGIR-TEST
+#- Synchronization ON
+#- HomeOffsets for prototype-rig in OTLA
+runScript $(ECMC_AGIR_DIR)/addGirder.iocsh, "DEV='AGIR-TEST',Synchronization=True,HO_TY1=-19.71609,HO_TY2=-29.68623,HO_TX1=2.42422,HO_TX2=0.70461"
+```
+
 ## Axes
 
 ### pysical axes

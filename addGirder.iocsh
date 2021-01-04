@@ -1,3 +1,16 @@
+#- Epics module for SLS 2.0 Girder prototype
+#-
+#- MACROS
+#- optional
+#- DEV              aka prefix, defaults to 'AGIR-TEST'
+#- Synchronization  optional parameter to disable synchronization, `Synchronization=[false,False,0]`
+#- 
+#- mandatory
+#- HO_TY1           home offset 1st wedge, defaults to 0
+#- HO_TX1           home offset 1st 'roll joint', defaults to 0
+#- HO_TY2           home offset 2nd wedge, defaults to 0
+#- HO_TX2           home offset 2nd 'roll joint', defaults to 0
+
 #- device name
 epicsEnvSet("DEV",      "${DEV=AGIR-TEST}")
 epicsEnvSet("CFG_ROOT", "${ECMC_AGIR_DIR}/")
