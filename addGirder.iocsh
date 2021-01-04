@@ -10,7 +10,7 @@ ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
 
 # ______________________________________________________________________________
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
 # ______________________________________________________________________________
 
 epicsEnvSet("motorName",  "TY1")
@@ -21,13 +21,13 @@ ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
 epicsEnvSet("homeOffset", "${HO_TY1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.1.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M1.1.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 1.2, Tx, first foot --> roll
 # ++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
 
 epicsEnvSet("motorName",  "TX1")
 epicsEnvSet("axisId",	    2)
@@ -37,12 +37,12 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M1.2.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M1.2.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 2.1, Ty, second foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
 
 epicsEnvSet("motorName",  "TY2")
 epicsEnvSet("axisId",	    3)
@@ -52,12 +52,12 @@ ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
 epicsEnvSet("homeOffset", "${HO_TY2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.1.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M2.1.sax"
 
 #- -----------------------------------------------------------------------------
 #- motor 2.2, Tx, second foot --> roll
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "HW_DESC=EP7211-0034_ALL"
-${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${ECMC_AGIR_DIR}AM8211_AGIR.cfg"
+${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
 
 epicsEnvSet("motorName",  "TX2")
 epicsEnvSet("axisId",	    4)
@@ -67,8 +67,7 @@ ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX2=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/M2.2.sax"
-
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M2.2.sax"
 
 #- Apply hardware configuration
 ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
@@ -79,15 +78,15 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}applyConfig.cmd
 
 # AXES
 #- virutal axes
-#- heave: TY
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/TY.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/TY.sax"
+#- heave: Ty
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}TY.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}TY.sax"
 #- pitch: Rx
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RX.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RX.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}RX.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}RX.sax"
 #- roll: Rz
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}/RZ.vax"
-${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}/RZ.sax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}configureVirtualAxis.cmd,     "CONFIG=${CFG_ROOT}RZ.vax"
+${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}RZ.sax"
 
 ##############################################################################
 ############# Configure diagnostics:
