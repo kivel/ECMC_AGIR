@@ -3,7 +3,7 @@ include /ioc/tools/driver.makefile
 
 MODULE=ECMC_AGIR
 
-LIBVERSION = IBS
+LIBVERSION = SLS
 
 # build for EPICS_Version >=7 only
 EXCLUDE_VERSIONS = 3
@@ -14,12 +14,15 @@ ARCH_FILTER = RHEL%
 # scripts
 SCRIPTS += startup.cmd
 SCRIPTS += addGirder.iocsh
+SCRIPTS += addGirder_EC1A.iocsh
 
 # config
 ## EP7211-0034 config for AM8211 Motor
 SCRIPTS += cfg/AM8211_AGIR.cfg
 ## physical axes
 SCRIPTS += cfg/axes/AM8122.pax
+SCRIPTS += cfg/axes/AM8122_EC1A.pax
+SCRIPTS += cfg/axes/AM8122_retry.pax
 ## virutal axes
 SCRIPTS += cfg/axes/TY.vax
 SCRIPTS += cfg/axes/RX.vax

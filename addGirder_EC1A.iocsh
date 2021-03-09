@@ -21,8 +21,6 @@ ecmcEpicsEnvSetCalcTernary("SYNC", "${Synchronization=1}", "", "#- ")
 #- -----------------------------------------------------------------------------
 #- motor 1.1, Ty, first foot --> pitch and heave
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=${Drive1},HW_DESC=EP7211-0034_ALL"
-
-# ______________________________________________________________________________
 ${SCRIPTEXEC} ${ecmccfg_DIR}applySlaveConfig.cmd, "LOCAL_CONFIG=${CFG_ROOT}AM8211_AGIR.cfg"
 # ______________________________________________________________________________
 
@@ -33,7 +31,7 @@ epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
 epicsEnvSet("homeOffset", "${HO_TY1=0}")
 
-${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122_EC1A.pax, CH_ID=1"
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M1.1.sax"
 
 #- -----------------------------------------------------------------------------
@@ -64,7 +62,7 @@ epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 ecmcEpicsEnvSetCalc("pitch",  "1/4.","%f")        # pitch 1 mm per 4 rev
 epicsEnvSet("homeOffset", "${HO_TY2=0}")
 
-${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122_EC1A.pax, CH_ID=2"
 ${SYNC}${SCRIPTEXEC} ${ecmccfg_DIR}applyAxisSynchronization.cmd, "CONFIG=${CFG_ROOT}M2.1.sax"
 
 #- -----------------------------------------------------------------------------
