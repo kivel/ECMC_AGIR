@@ -13,7 +13,7 @@ epicsEnvSet("ECMC_CMD_FRM_OTHER_PLC_ENABLE",   "1")       # Allow commands from 
 epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",        "1")       # Enable Axis PLC
 # Each line below is appended to one single expression/source.
 # Executed in sync with axis (before)
-epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "ax6.enc.actpos:=(ax1.enc.actpos-ax3.enc.actpos)/2.620|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "ax6.enc.actpos:=(ax1.enc.actpos-ax3.enc.actpos)/2.620*3.48994e-2|")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax5.traj.busy){ax6.drv.enable:=1|}|")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "")

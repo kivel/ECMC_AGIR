@@ -19,8 +19,8 @@ epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder 
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s0.ZERO")              # Ethercat entry for actual position input (encoder)
 
 #- Trajectory
-epicsEnvSet("ECMC_VELO",                  "1.0")
-epicsEnvSet("ECMC_JOG_VEL",               "0.10")
+epicsEnvSet("ECMC_VELO",                  "0.035")
+epicsEnvSet("ECMC_JOG_VEL",               "0.005")
 epicsEnvSet("ECMC_JAR",                   "0.0")                      # JAR defaults to VELO/ACCL
 epicsEnvSet("ECMC_ACCL",                  "0.1")
 epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergency deceleration
@@ -50,7 +50,7 @@ epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "0")
 
 #- At target
-epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.0005")
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.00005")
 epicsEnvSet("ECMC_MON_AT_TARGET_TIME",    "100")
 epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
 
