@@ -21,7 +21,7 @@ epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s${ECMC_EC_SLAVE_NUM}.POSITION") 
 #- Drive
 epicsEnvSet("ECMC_DRV_TYPE"               "1")                                           # Stepper: 0. DS402: 1 (DS402 = servos and advanced stepper drives)
 # Scalings: Amplifier Max 8000Hz = 2880000 deg/s (8kHz Reverse engineered)
-epicsEnvSet("ECMC_DRV_SCALE_NUM"          "2880000")                                     # Fastest speed in engineering units
+epicsEnvSet("ECMC_DRV_SCALE_NUM"          "-2880000")                                     # Fastest speed in engineering units
 epicsEnvSet("ECMC_DRV_SCALE_DENOM"        "2147483648")                                  # I/O range for ECMC_EC_ALIAS_DRV_VELO_SET
 epicsEnvSet("ECMC_EC_DRV_CONTROL",        "ec0.s${ECMC_EC_SLAVE_NUM}.CONTROL")       # Ethercat entry for control word or bit output
 epicsEnvSet("ECMC_EC_DRV_STATUS",         "ec0.s${ECMC_EC_SLAVE_NUM}.STATUS")        # Ethercat entry for status word or bit input

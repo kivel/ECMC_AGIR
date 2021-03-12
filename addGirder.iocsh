@@ -46,7 +46,7 @@ epicsEnvSet("motorName",  "TX1")
 epicsEnvSet("axisId",	    2)
 epicsEnvSet("axisDesc",	  "${DEV}: ${motorName}")
 
-ecmcEpicsEnvSetCalc("pitch",  "1/30.","%f")        # pitch 1 mm per 30 rev
+ecmcEpicsEnvSetCalc("pitch",  "-1/30.","%f")        # pitch 1 mm per 30 rev
 epicsEnvSet("homeOffset", "${HO_TX1=0}")
 
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureAxis.cmd,            "CONFIG=${CFG_ROOT}AM8122.pax"

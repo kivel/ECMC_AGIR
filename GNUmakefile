@@ -21,6 +21,7 @@ SCRIPTS += addGirder_EC1A.iocsh
 SCRIPTS += cfg/AM8211_AGIR.cfg
 ## physical axes
 SCRIPTS += cfg/axes/AM8122.pax
+SCRIPTS += cfg/axes/AM8122_rev.pax
 SCRIPTS += cfg/axes/AM8122_EC1A.pax
 SCRIPTS += cfg/axes/AM8122_retry.pax
 ## virutal axes
