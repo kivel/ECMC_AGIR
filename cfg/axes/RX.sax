@@ -14,8 +14,8 @@ epicsEnvSet("ECMC_CMD_AXIS_PLC_ENABLE",        "1")       # Enable Axis PLC
 # Each line below is appended to one single expression/source.
 # Executed in sync with axis (before)
 epicsEnvSet("ECMC_AXIS_EXPR_LINE_1",           "ax6.enc.actpos:=(ax1.enc.actpos-ax3.enc.actpos)/2.620*3.48994e-2|")
-# epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "if(ax5.traj.busy){ax6.drv.enable:=1|}|")
-# epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_2",           "ax6.mon.ilockfwd:=( (ax1.enc.actpos < ax1.mon.highsoftlim) and (ax3.enc.actpos > ax3.mon.lowsoftlim) )|")
+epicsEnvSet("ECMC_AXIS_EXPR_LINE_3",           "ax6.mon.ilockbwd:=( (ax1.enc.actpos > ax1.mon.lowsoftlim) and (ax3.enc.actpos < ax3.mon.highsoftlim) )|")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_4",           "")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_5",           "")
 # epicsEnvSet("ECMC_AXIS_EXPR_LINE_6",           "")
